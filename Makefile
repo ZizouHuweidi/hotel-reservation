@@ -47,7 +47,10 @@ db: ## Access the PostgreSQL database container
 	docker exec -it postgres_db psql -U admin -d hotel_reservation
 
 migrate: ## Run database migrations
-	docker exec -it hotel_backend npx knex migrate:latest --knexfile src/knexfile.js
+	knex migrate:latest --knexfile backend/knexfile.js
+
+# migrate: ## Run database migrations
+# 	docker exec -it hotel_backend npx knex migrate:latest --knexfile src/knexfile.js
 
 seed: ## Seed the database with sample data
 	docker exec -it hotel_backend npx knex seed:run --knexfile src/knexfile.js
