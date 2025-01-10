@@ -1,7 +1,5 @@
 # Variables
 DOCKER_COMPOSE=docker-compose
-FRONTEND_DIR=frontend
-BACKEND_DIR=backend
 
 # Targets
 .PHONY: help up build down clean logs frontend backend db migrate seed test
@@ -28,32 +26,23 @@ clean: ## Stop, remove containers, and clean volumes
 logs: ## Tail logs for all services
 	$(DOCKER_COMPOSE) logs -f
 
-frontend: ## Run frontend commands in the container
-	cd $(FRONTEND_DIR) && npm run start
+dev:
+	nodemon src/index.ts
 
-frontend-docker: ## Run frontend commands in the container
-	docker exec -it hotel_frontend sh
-
-# backend:
-# 	npx ts-node backend/src/index.ts
-
-backend:
-	cd backend && nodemon src/index.ts
-
-backend-docker: ## Run backend commands in the container
+backend: ## Run backend commands in the container
 	docker exec -it hotel_backend sh
 
 db: ## Access the PostgreSQL database container
 	docker exec -it postgres_db psql -U admin -d hotel_reservation
 
-migrate: ## Run database migrations
-	knex migrate:latest --knexfile backend/knexfile.js
+migrate-dev: ## Run database migrations
+	knex migrate:latest --knexfile knexfile.js
 
-# migrate: ## Run database migrations
-# 	docker exec -it hotel_backend npx knex migrate:latest --knexfile src/knexfile.js
+migrate: ## Run database migrations
+	docker exec -it hotel_backend npx knex migrate:latest --knexfile knexfile.js
 
 seed: ## Seed the database with sample data
-	docker exec -it hotel_backend npx knex seed:run --knexfile src/knexfile.js
+	docker exec -it hotel_backend npx knex seed:run --knexfile knexfile.js
 
 test: ## Run tests for backend
 	docker exec -it hotel_backend npm test
