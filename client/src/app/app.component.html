@@ -1,0 +1,31 @@
+<tui-root>
+  <main>
+    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 class="text-4xl font-bold text-blue-600 mb-10">Hotel Reservation System</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-11/12 max-w-3xl">
+        <!-- Guests Management Link -->
+        <a routerLink="/guests"
+          class="block p-6 text-center bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-blue-50 transition">
+          <h2 class="text-xl font-semibold text-gray-800">Guests Management</h2>
+          <p class="text-gray-600 mt-2">Manage guests, view their details, and update information.</p>
+        </a>
+
+        <!-- Rooms Management Link -->
+        <a routerLink="/rooms"
+          class="block p-6 text-center bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-green-50 transition">
+          <h2 class="text-xl font-semibold text-gray-800">Rooms Management</h2>
+          <p class="text-gray-600 mt-2">View rooms, check reservations, and update room details.</p>
+        </a>
+
+        <!-- Reservations Management Link -->
+        <a routerLink="/reservations"
+          class="block p-6 text-center bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-yellow-50 transition">
+          <h2 class="text-xl font-semibold text-gray-800">Reservations Management</h2>
+          <p class="text-gray-600 mt-2">Manage reservations, check availability, and cancel bookings.</p>
+        </a>
+      </div>
+    </div>
+  </main>
+</tui-root>
+<router-outlet></router-outlet>
